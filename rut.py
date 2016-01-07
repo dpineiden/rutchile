@@ -1,5 +1,8 @@
 import re
 import string
+import os, sys
+#git clone https://github.com/dpineiden/number2name
+from number2name.nombre_numero import Nombre_Numero
 
 class RutChile:
 	def __init__(self, ver_rut):
@@ -7,6 +10,7 @@ class RutChile:
 		self.rut=""
 		self.verifica_rut(ver_rut)	
 		self.digito_verificador()
+		self.rut_palabras()
 
 	def verifica_rut(self,rut_raw):
 		l = len(rut_raw)
@@ -74,3 +78,15 @@ class RutChile:
 			print("El digito verificador no concuerda")
 
 		return self.es_rut
+
+	def rut_palabras(self):
+		rut_separado = self.rut.split("-")
+		numero = rut_separado[0]
+		digito = rut_separado[1]
+		Nombre_numero = Nombre_Numero(int(numero))
+		if digito.isdigit():
+			Nombre_digito = Nombre_Numero(int(digito))
+		else:
+			Nombre_digito.nombre = { 0 : "ka" }
+
+		self.en_palabras = Nombre_numero.Name_Total + " raya " + Nombre_digito.nombre[0] 		
