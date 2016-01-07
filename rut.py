@@ -9,19 +9,39 @@ class RutChile:
 		#self.verifica_rut(ver_rut)
 		self.rut=""
 		self.verifica_rut(ver_rut)	
+		print(self.rut)
 		self.digito_verificador()
 		self.rut_palabras()
 
 	def verifica_rut(self,rut_raw):
-		l = len(rut_raw)
 		rut = ""
 		pre_rut = "" 
 		cuenta = 0
 
-		if l >= 9:
-			char_1 = rut_raw[2]
-			char_2 = rut_raw[6]
-			if char_1 == char_2 and char_1 == ".":
+		rut_raw_separado = rut_raw.split("-")
+		numero_raw =re.sub(r"[\.]",r"",rut_raw_separado[0])
+		#print(numero_raw)
+		l_raw = len(numero_raw)
+		print("Digitos: "+str(l_raw))
+		if l_raw == 6:
+			char_1 = "."
+			r_punto = 2
+		elif l_raw == 7:
+			r_punto = 1 	
+		elif l_raw == 8:
+			r_punto = 0
+
+		l = len(numero_raw)
+
+		if numero_raw.isdigit():
+			if r_punto<2:
+				char_1 = rut_raw[2-r_punto]
+				char_2 = rut_raw[6-r_punto]
+			else:
+				char_1 = "."
+				char_2 = rut_raw[3]
+
+			if char_1 == char_2 and char_2 == ".":
 				pre_rut = re.sub(r"[\. - \-]",r"",rut_raw)
 			else:
 				pre_rut = re.sub(r"[\-]",r"",rut_raw)
@@ -35,12 +55,14 @@ class RutChile:
 						for x  in range(lir):
 							if inter_rut[x].isdigit():
 								cuenta +=1
-		
-		if cuenta == 7:
+		#print("Pre rut "+pre_rut)
+		pre_val = 7 - r_punto
+		#print("Pre val "+str(pre_val))
+		if cuenta == pre_val:
 			rut = pre_rut[0:len(pre_rut)-1]+"-"+pre_rut[len(pre_rut)-1]
 			self.rut = rut
 
-		elif cuenta != 7:
+		elif cuenta != pre_val:
 			print("El valor ingresado no es un RUT")
 
 
@@ -64,14 +86,20 @@ class RutChile:
 		division = valor/11
 		resto = valor-division*11
 		diferencia = 11 - resto
-		print("Diferencia "+str(diferencia))
+		#print("Diferencia "+str(diferencia))
 		if diferencia == 11:
 			test = 0
 		elif diferencia == 10:
 			test = "k"
 		elif diferencia<10:
 			test = diferencia
-		if int(digito) == test:
+		if digito.isdigit():
+			if int(digito) == test:
+				self.es_rut = True
+			else:
+				self.es_rut = False
+				print("El digito verificador no concuerda")
+		elif digito == "k":
 			self.es_rut = True
 		else:
 			self.es_rut = False
@@ -85,8 +113,8 @@ class RutChile:
 		digito = rut_separado[1]
 		Nombre_numero = Nombre_Numero(int(numero))
 		if digito.isdigit():
-			Nombre_digito = Nombre_Numero(int(digito))
+			Nombre_digito = Nombre_Numero(int(digito))[0]
 		else:
-			Nombre_digito.nombre = { 0 : "ka" }
+			Nombre_digito = "ka"
 
-		self.en_palabras = Nombre_numero.Name_Total + " raya " + Nombre_digito.nombre[0] 		
+		self.en_palabras = Nombre_numero.Name_Total + " raya " + Nombre_digito
