@@ -113,7 +113,7 @@ class RutChile:
 		digito = rut_separado[1]
 		Nombre_numero = Nombre_Numero(int(numero))
 		if digito.isdigit():
-			Nombre_digito = Nombre_Numero(int(digito))[0]
+			Nombre_digito = Nombre_Numero(int(digito)).Name_Total.lower()
 		else:
 			Nombre_digito = "ka"
 
