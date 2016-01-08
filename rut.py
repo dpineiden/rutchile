@@ -2,7 +2,7 @@ import re
 import string
 import os, sys
 #git clone https://github.com/dpineiden/number2name
-from number2name.nombre_numero import Nombre_Numero
+from .number2name.nombre_numero import Nombre_Numero
 
 class RutChile:
 	def __init__(self, ver_rut):
@@ -73,7 +73,7 @@ class RutChile:
 		numero = rut_separado[0][::-1]
 		digito = rut_separado[1]
 		l = len(numero)
-		valor=0
+		valor = 0
 		test = 0
 		serie = [2,3,4,5,6,7]
 		for x in range(l):
@@ -82,9 +82,9 @@ class RutChile:
 			elif x>=len(serie):
 				i = x - len(serie)
 			valor += serie[i]*int(numero[x])	
-			#print("Serie: "+str(serie[i])+" valor: "+numero[x]+" valor: "+str(valor))	
-		division = valor/11
-		resto = valor-division*11
+			print("Serie: "+str(serie[i])+" valor: "+numero[x]+" valor: "+str(valor))	
+		division = float(valor)/11
+		resto = valor-int(division)*11
 		diferencia = 11 - resto
 		#print("Diferencia "+str(diferencia))
 		if diferencia == 11:
@@ -94,9 +94,11 @@ class RutChile:
 		elif diferencia<10:
 			test = diferencia
 		if digito.isdigit():
-			if int(digito) == test:
+			if int(digito) == int(test):
 				self.es_rut = True
+				print(self.rut)
 			else:
+				print(str(valor)+":"+str(division)+":"+str(resto)+":"+str(diferencia)+":"+self.rut)
 				self.es_rut = False
 				print("El digito verificador no concuerda")
 		elif digito == "k":
