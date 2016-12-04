@@ -2,7 +2,7 @@ import re
 import string
 import os, sys
 #git clone https://github.com/dpineiden/number2name
-from .number2name.nombre_numero import Nombre_Numero
+from number2name_es.nombre_numero import Nombre_Numero
 
 class RutChile:
 	def __init__(self, ver_rut):
