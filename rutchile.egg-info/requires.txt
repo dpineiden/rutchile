@@ -1,0 +1,2 @@
+markdown==2.6.5
+number2name_es

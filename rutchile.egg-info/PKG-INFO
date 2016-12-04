@@ -1,0 +1,20 @@
+Metadata-Version: 1.1
+Name: rutchile
+Version: 1.0.0
+Summary: Validate RUT from Chile
+Home-page: https://github.com/dpineiden/rutchile
+Author: David Pineda Osorio
+Author-email: dahalpi@gmail.com
+License: MIT
+Description: # rutchile
+        Clase y método para verificar RUT Chileno (en python)
+        
+        Entre las características:
+        	-Verificar que el dato ingresado tiene una estructura de rut: XX XXX XXX -X 
+        	-Verificar que el digito verificador (ultimo dígito) corresponda 
+        	-Entrega el nombre en palabras del rut
+Keywords: rut identified chile
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: License :: OSI Approved :: MIT License
+Classifier: License :: OSI Approved :: MIT License
