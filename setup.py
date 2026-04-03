@@ -25,7 +25,7 @@ setup(
             'License :: OSI Approved :: MIT License',],
         keywords='rut identified chile',
         packages=find_packages(),
-        install_requires=['markdown==2.6.5','number2name_es'],
+        install_requires=['markdown==3.8.1','number2name_es'],
         package_data={
             #'sample': ['package_data.dat'],
         },
